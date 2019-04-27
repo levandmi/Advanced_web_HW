@@ -52,7 +52,10 @@ def scrape_info():
 
     html = browser.html
     soup = bs(html, "html.parser")
-    mars_weather = soup.find_all("ol", id="stream-items-id")[0].li.p.text
+    mars_weather_element = soup.find_all("ol", id="stream-items-id")[0].li.p
+    unwanted = mars_weather_element.find('a')
+    unwanted.extract()
+    mars_weather = mars_weather_element.text
     browser.quit()
     # =========================================================================
 
